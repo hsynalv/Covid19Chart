@@ -1,3 +1,4 @@
+using Covid19Chart.API.Hubs;
 using Covid19Chart.API.Models;
 using Microsoft.EntityFrameworkCore;
 
@@ -7,6 +8,7 @@ builder.Services.AddDbContext<AppDbContext>(opt =>
 {
     opt.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
 });
+builder.Services.AddSignalR();
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -26,6 +28,7 @@ app.UseHttpsRedirection();
 
 app.UseAuthorization();
 
+app.MapHub<CovidHub>("/covid19chart");
 app.MapControllers();
 
 app.Run();
