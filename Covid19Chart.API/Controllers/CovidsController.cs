@@ -20,8 +20,8 @@ namespace Covid19Chart.API.Controllers
         public async Task<IActionResult> SaveCovid(Covid covid)
         {
             await _covidService.SaveCovid(covid);
-            var covidList =  _covidService.GetCovidList();
-            return Ok(covidList);
+            //var covidList =  _covidService.GetCovidList();
+            return Ok(_covidService.GetCovidChartList());
         }
 
         [HttpGet]
