@@ -15,6 +15,19 @@ builder.Services.AddScoped<CovidService>();
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
+
+builder.Services.AddCors(opt =>
+{
+    opt.AddPolicy("CorsPolicy", build =>
+    {
+        build.WithOrigins("https://localhost:5010")
+            .AllowAnyMethod()
+            .AllowAnyHeader()
+            .AllowCredentials();
+    });
+});
+
+
 builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
@@ -27,7 +40,7 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-
+app.UseCors("CorsPolicy");
 app.UseAuthorization();
 
 app.MapHub<CovidHub>("/covid19chart");
