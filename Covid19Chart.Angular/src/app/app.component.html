@@ -1,0 +1,14 @@
+Merhaba Dünya
+
+<google-chart 
+  [type]="options.type"
+  [data]="covidService.covidChartList" 
+  [width]="1000" 
+  [height]="700" 
+  [columns]="columnNames" 
+  [options]="options" 
+  [title]="'Covid19 Chart'"
+>
+</google-chart>
+
+  <router-outlet></router-outlet>
